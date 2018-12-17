@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capgemini.dao.ResumeMapper">
+  <resultMap id="BaseResultMap" type="com.capgemini.dto.Resume">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="residence" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nationality" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="industry_exp_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="technical_exp_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="career_exp_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="language_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="project_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="certificate_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="education_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="other_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="img_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="completion" javaType="java.lang.Double" jdbcType="DOUBLE" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.capgemini.dto.Resume">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="residence" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nationality" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="industry_exp_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="technical_exp_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="career_exp_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="language_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="project_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="certificate_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="education_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="other_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="img_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="completion" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="profile" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, residence, nationality, industry_exp_id, technical_exp_id, career_exp_id, 
+    language_id, project_id, certificate_id, education_id, other_id, type, img_url, completion
+  </sql>
+  <sql id="Blob_Column_List">
+    profile
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from resume
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resume
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.capgemini.dto.Resume">
+    insert into resume (id, name, residence, 
+      nationality, industry_exp_id, technical_exp_id, 
+      career_exp_id, language_id, project_id, 
+      certificate_id, education_id, other_id, 
+      type, img_url, completion, 
+      profile)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{residence,jdbcType=VARCHAR}, 
+      #{nationality,jdbcType=VARCHAR}, #{industryExpId,jdbcType=INTEGER}, #{technicalExpId,jdbcType=INTEGER}, 
+      #{careerExpId,jdbcType=INTEGER}, #{languageId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
+      #{certificateId,jdbcType=INTEGER}, #{educationId,jdbcType=INTEGER}, #{otherId,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{completion,jdbcType=DOUBLE}, 
+      #{profile,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.capgemini.dto.Resume">
+    insert into resume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="residence != null">
+        residence,
+      </if>
+      <if test="nationality != null">
+        nationality,
+      </if>
+      <if test="industryExpId != null">
+        industry_exp_id,
+      </if>
+      <if test="technicalExpId != null">
+        technical_exp_id,
+      </if>
+      <if test="careerExpId != null">
+        career_exp_id,
+      </if>
+      <if test="languageId != null">
+        language_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="certificateId != null">
+        certificate_id,
+      </if>
+      <if test="educationId != null">
+        education_id,
+      </if>
+      <if test="otherId != null">
+        other_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="completion != null">
+        completion,
+      </if>
+      <if test="profile != null">
+        profile,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="industryExpId != null">
+        #{industryExpId,jdbcType=INTEGER},
+      </if>
+      <if test="technicalExpId != null">
+        #{technicalExpId,jdbcType=INTEGER},
+      </if>
+      <if test="careerExpId != null">
+        #{careerExpId,jdbcType=INTEGER},
+      </if>
+      <if test="languageId != null">
+        #{languageId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="certificateId != null">
+        #{certificateId,jdbcType=INTEGER},
+      </if>
+      <if test="educationId != null">
+        #{educationId,jdbcType=INTEGER},
+      </if>
+      <if test="otherId != null">
+        #{otherId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="completion != null">
+        #{completion,jdbcType=DOUBLE},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.capgemini.dto.Resume">
+    update resume
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        residence = #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="industryExpId != null">
+        industry_exp_id = #{industryExpId,jdbcType=INTEGER},
+      </if>
+      <if test="technicalExpId != null">
+        technical_exp_id = #{technicalExpId,jdbcType=INTEGER},
+      </if>
+      <if test="careerExpId != null">
+        career_exp_id = #{careerExpId,jdbcType=INTEGER},
+      </if>
+      <if test="languageId != null">
+        language_id = #{languageId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="certificateId != null">
+        certificate_id = #{certificateId,jdbcType=INTEGER},
+      </if>
+      <if test="educationId != null">
+        education_id = #{educationId,jdbcType=INTEGER},
+      </if>
+      <if test="otherId != null">
+        other_id = #{otherId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="completion != null">
+        completion = #{completion,jdbcType=DOUBLE},
+      </if>
+      <if test="profile != null">
+        profile = #{profile,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.capgemini.dto.Resume">
+    update resume
+    set name = #{name,jdbcType=VARCHAR},
+      residence = #{residence,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      industry_exp_id = #{industryExpId,jdbcType=INTEGER},
+      technical_exp_id = #{technicalExpId,jdbcType=INTEGER},
+      career_exp_id = #{careerExpId,jdbcType=INTEGER},
+      language_id = #{languageId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
+      certificate_id = #{certificateId,jdbcType=INTEGER},
+      education_id = #{educationId,jdbcType=INTEGER},
+      other_id = #{otherId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      completion = #{completion,jdbcType=DOUBLE},
+      profile = #{profile,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.capgemini.dto.Resume">
+    update resume
+    set name = #{name,jdbcType=VARCHAR},
+      residence = #{residence,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      industry_exp_id = #{industryExpId,jdbcType=INTEGER},
+      technical_exp_id = #{technicalExpId,jdbcType=INTEGER},
+      career_exp_id = #{careerExpId,jdbcType=INTEGER},
+      language_id = #{languageId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
+      certificate_id = #{certificateId,jdbcType=INTEGER},
+      education_id = #{educationId,jdbcType=INTEGER},
+      other_id = #{otherId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      completion = #{completion,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

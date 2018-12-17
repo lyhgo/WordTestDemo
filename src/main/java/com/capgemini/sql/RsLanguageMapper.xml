@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capgemini.dao.RsLanguageMapper">
+  <resultMap id="BaseResultMap" type="com.capgemini.dto.RsLanguage">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="language" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="listen_speak" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="read" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="write" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="language_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, language, listen_speak, read, write, language_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rs_language
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rs_language
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.capgemini.dto.RsLanguage">
+    insert into rs_language (id, language, listen_speak, 
+      read, write, language_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{language,jdbcType=VARCHAR}, #{listenSpeak,jdbcType=INTEGER}, 
+      #{read,jdbcType=INTEGER}, #{write,jdbcType=INTEGER}, #{languageId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.capgemini.dto.RsLanguage">
+    insert into rs_language
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="listenSpeak != null">
+        listen_speak,
+      </if>
+      <if test="read != null">
+        read,
+      </if>
+      <if test="write != null">
+        write,
+      </if>
+      <if test="languageId != null">
+        language_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="listenSpeak != null">
+        #{listenSpeak,jdbcType=INTEGER},
+      </if>
+      <if test="read != null">
+        #{read,jdbcType=INTEGER},
+      </if>
+      <if test="write != null">
+        #{write,jdbcType=INTEGER},
+      </if>
+      <if test="languageId != null">
+        #{languageId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.capgemini.dto.RsLanguage">
+    update rs_language
+    <set>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="listenSpeak != null">
+        listen_speak = #{listenSpeak,jdbcType=INTEGER},
+      </if>
+      <if test="read != null">
+        read = #{read,jdbcType=INTEGER},
+      </if>
+      <if test="write != null">
+        write = #{write,jdbcType=INTEGER},
+      </if>
+      <if test="languageId != null">
+        language_id = #{languageId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.capgemini.dto.RsLanguage">
+    update rs_language
+    set language = #{language,jdbcType=VARCHAR},
+      listen_speak = #{listenSpeak,jdbcType=INTEGER},
+      read = #{read,jdbcType=INTEGER},
+      write = #{write,jdbcType=INTEGER},
+      language_id = #{languageId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
