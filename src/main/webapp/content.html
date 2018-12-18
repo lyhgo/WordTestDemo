@@ -12,10 +12,37 @@
 	
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="font/iconfont.js">
+	
 	<!-- <script type='text/javascript' src='js/custom.js'></script> -->
 	<script type="text/javascript">
 		$(function(){
+			var data={};
+			/* function submit1(){
+				var data={
+						resumeInfo:{
+							name: $("#name"),
+		    				residence: $("#live_dir"),
+		    				nationality: $("#nation"),
+		    				type: $("#position")
+						}
+				}
+				$.post("update.do",data,function(data){
+					console.log("success");
+				})
+			}) */
+			$("#qq").click(function(){
+				console.log("1111");
+				resumeInfo={
+							name: $("#name").val(),
+		    				residence: $("#live_dir").val(),
+		    				nationality: $("#nation").val(),
+		    				type: $("#position").val()
+						
+				}
+				$.post("update.do",resumeInfo,function(resumeInfo){
+					console.log("success");
+				})
+			})
 			$(".xialakuang1").hover(function(){
 				$(".something1").toggle();
 			})
@@ -31,9 +58,11 @@
 			$(".contentLeft").height($(window).height()-148);//将div高度设置为窗口高度
             $(".contentRight").height($(window).height()-148);//将div高度设置为窗口高度
             // $(".contentLeft li:first").trigger('click');
-    
-        })
-   
+    		
+		})
+		
+    	
+   		
 	</script>
 </head>
 <body>
@@ -229,7 +258,7 @@
 								})
 								
 							</script>
-							<!-- ---------------------------------经历/经验-------------------------------------- -->
+							<!-- ---------------------------------经历/经验-------------------------------------- -->					
 							<div class="experience" id="experience">经历/经验</div>
 							<table cellspacing="5" cellpadding="10px">
 								<div id="congye">
@@ -384,6 +413,7 @@
 								</tr>
 							</table>
 						</form>
+						<button id="qq" class="btn" >submit</button>
 					</div>
 				</div>
 			</div>
@@ -450,6 +480,8 @@
 				});
 			</script>
 			<script>
+			//测试select元素值获取
+			//var test=$("#position").val();
 				laydate.render({
 					elem : '#dates_4',
 					showBottom: false,

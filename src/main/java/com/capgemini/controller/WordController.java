@@ -1,5 +1,7 @@
 package com.capgemini.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +13,10 @@ import com.capgemini.service.Tool;
 public class WordController {
 	@Autowired
 	private Tool tool;
-	@RequestMapping("testpoi.do")
+	@RequestMapping("update.do")
 	@ResponseBody
-	public String getAdminALL(String desc){
-		tool.SimpleInsert(desc);
+	public String getAdminALL(HashMap resumeInfo){
+		System.out.println(resumeInfo);
 		return "sucess";
 	}
 }
